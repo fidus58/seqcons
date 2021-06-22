@@ -7,18 +7,19 @@
 
 #include <iostream>
 #include <thread>
+#include <atomic>
 
-int x,y;
-int r1,r2;
+std::atomic<int> x,y;
+std::atomic<int> r1,r2;
 
 void t1f(){
     x = 1;
-    r1 = y;
+    r1.store(y);
 }
 
 void t2f(){
     y = 1;
-    r2 = x;
+    r2.store(x);
 }
 
 int main() {
